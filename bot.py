@@ -37,7 +37,7 @@ class CommandValue():
     
 class MainBot(Bot):
 
-    def __init__(self, track, training_wheels=True, name="MainBot"):
+    def __init__(self, track, training_wheels=True, name="MainBot", contributor="Anonymous"):
         super().__init__(track)
 
         self.fps = 60.0
@@ -61,6 +61,7 @@ class MainBot(Bot):
         self.prevous_distance = 0.0
 
         self.int_name = name
+        self.int_contributor = contributor
 
 
     @property
@@ -73,7 +74,8 @@ class MainBot(Bot):
 
     def compute_commands(self, next_waypoint: int, position: Transform, velocity: Vector2) -> Tuple:
         self.simple_max_speed = min(200.0, self.simple_max_speed + 0.1)
-        print(self.simple_max_speed)
+        if DEBUG_MODE:
+            print(self.simple_max_speed)
 
         self.calc_and_store(next_waypoint, position, velocity)
 
@@ -172,9 +174,9 @@ class MainBot(Bot):
 class PedaltotheMetal(MainBot):
 
     def __init__(self, track):
-        super().__init__(track, False, "PedaltotheMetal")
+        super().__init__(track, False, "PedaltotheMetal", contributor="Rinus")
 
 class SmoothSailing(MainBot):
 
     def __init__(self, track):
-        super().__init__(track, True, "SmoothSailing")
+        super().__init__(track, True, "SmoothSailing", contributor="Rinus")
